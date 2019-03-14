@@ -3,8 +3,8 @@
 @section('content')
     @auth
         <div class="container">
+        @if (Auth::user()->personal_info == 0)
             <div class="card">
-            @if (Auth::user()->personal_info == 0)
                 <div class="card-header">
                     <h3>Welcome, {{ Auth::user()->email }}!
                     @if ($s->id == 1)
@@ -73,7 +73,9 @@
                         <button class="btn btn-outline-primary" type="submit">Submit</button>
                     </form>
                 </div>
-            @else
+            </div>
+        @else
+            <div class="card">
                 <div class="card-header">
                     <h3>Welcome, {{ Auth::user()->email }}!
                     @if ($s->id == 1)
@@ -81,7 +83,7 @@
                     @else
                         <span class="badge badge-danger">{{ $s->description }}</span>
                     @endif
-                    <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit</a></h3>
+                    <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit Profile</a></h3>
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Personal Info:</h4>
@@ -101,8 +103,19 @@
                     <h5>Address: {{ $pi->address }}</h5>
                     <h5>Email Address: {{ $pi->email }}</h5>
                 </div>
-            @endif
             </div>
+
+            <br>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit Certifications</a></h3>
+                </div>
+                <div class="card-body">
+                
+                </div>
+            </div>
+        @endif
         </div>
     @endauth
     @guest
