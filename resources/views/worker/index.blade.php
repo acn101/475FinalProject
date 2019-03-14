@@ -100,8 +100,6 @@
                 
                     <h5>Address: {{ $pi->address }}</h5>
                     <h5>Email Address: {{ $pi->email }}</h5>
-
-                    <h5>Status: {{ $s->description }}</h5>
                 </div>
             @endif
             </div>
