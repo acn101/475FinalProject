@@ -16,9 +16,11 @@ class WorkerController extends Controller
     {
         if (auth()->user()->personal_info == 1) {
             $pi = PersonalInfo::find(\App\Worker::find(auth()->user()->id)->personalInfoID);
+            $s = \App\Status::find(\App\Worker::find(auth()->user()->id)->statusID);
 
             return view ('worker.index')
-            ->with('pi', $pi);
+            ->with('pi', $pi)
+            ->with('s', $s);
         } else {
             return view ('worker.index');
         }
@@ -49,7 +51,7 @@ class WorkerController extends Controller
         $pi->primaryNumber = $request->primaryNumber;
         $pi->secondaryNumber = $request->secondaryNumber;
         $pi->address = $request->address;
-        $pi->email = $request->email;
+        $pi->email = auth()->user()->email;
         $pi->save();
 
         $w = new \App\Worker;
@@ -105,7 +107,7 @@ class WorkerController extends Controller
         $pi->primaryNumber = $request->primaryNumber;
         $pi->secondaryNumber = $request->secondaryNumber;
         $pi->address = $request->address;
-        $pi->email = $request->email;
+        $pi->email = auth()->user()->email;
         $pi->save();
         
         return redirect('/worker');

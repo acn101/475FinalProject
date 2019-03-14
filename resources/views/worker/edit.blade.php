@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label class="card-text" for="email">Email Address</label>
                             <input class="form-control shadow-sm" type="email" name="email" id="" value="{{ Auth::user()->email }}"
-                                required>
+                                required disabled>
                         </div>
 
                         <button class="btn btn-outline-primary" type="submit">Submit</button>
