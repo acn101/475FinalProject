@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index');
+
+Route::get('/worker', 'WorkerController@index');
+Route::post('/worker/store', 'WorkerController@store');
+Route::get('/worker/edit/{id}', 'WorkerController@edit');
+Route::post('/worker/update/{id}', 'WorkerController@update');
