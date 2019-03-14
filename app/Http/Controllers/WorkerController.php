@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PersonalInfo;
+use DB;
 
 class WorkerController extends Controller
 {
@@ -14,13 +15,18 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->personal_info == 1) {
+        if (auth()->check() && auth()->user()->personal_info == 1) {
             $pi = PersonalInfo::find(\App\Worker::find(auth()->user()->id)->personalInfoID);
             $s = \App\Status::find(\App\Worker::find(auth()->user()->id)->statusID);
+            $wcs = DB::table('certifications')
+            ->join('worker_certs', 'certificationID', '=', 'id')
+            ->where('workerID', '=', auth()->user()->id)
+            ->get();
 
             return view ('worker.index')
             ->with('pi', $pi)
-            ->with('s', $s);
+            ->with('s', $s)
+            ->with('wcs', $wcs);
         } else {
             return view ('worker.index');
         }

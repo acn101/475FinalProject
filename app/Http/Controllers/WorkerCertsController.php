@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class WorkerCertsController extends Controller
 {
@@ -34,7 +35,7 @@ class WorkerCertsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
     }
 
     /**
@@ -54,9 +55,17 @@ class WorkerCertsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(\App\Worker $id)
     {
-        return view('workercerts.edit');
+        $cs = \App\Certification::all();
+        $wcs = DB::table('worker_certs')
+            ->rightJoin('certifications', 'id', '=', 'certificationID')
+            ->orderBy('description', 'asc')
+            ->get();
+
+        return view('workercerts.edit')
+        ->with('cs', $cs)
+        ->with('wcs', $wcs);
     }
 
     /**
@@ -68,7 +77,25 @@ class WorkerCertsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $wcs = DB::table('worker_certs')
+        ->rightJoin('certifications', 'id', '=', 'certificationID')
+        ->where('id', '=', $request->cert)
+        ->first();
+
+        if (!is_null($wcs->workerID)) {
+            $wc = DB::table('worker_certs')
+            ->where('workerID', '=', $id)
+            ->where('certificationID', '=', $request->cert);
+            $wc->delete();
+        } else {
+            $wc = new \App\WorkerCerts;
+            $wc->certificationID = $request->cert;
+            $wc->workerID = $id;
+            $wc->timestamps = false;
+            $wc->save();
+        }
+
+        return back();
     }
 
     /**

@@ -21,3 +21,4 @@ Route::get('/worker/edit/{id}', 'WorkerController@edit');
 Route::post('/worker/update/{id}', 'WorkerController@update');
 
 Route::get('/workercerts/edit/{id}', 'WorkerCertsController@edit');
+Route::post('/workercerts/update/{id}', 'WorkerCertsController@update');

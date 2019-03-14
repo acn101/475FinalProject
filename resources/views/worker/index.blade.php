@@ -112,7 +112,13 @@
                     <h3>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit Certifications</a></h3>
                 </div>
                 <div class="card-body">
-                
+                    <div class="row">
+                        @foreach ($wcs as $wc)
+                            <div class="col-sm-4 py-1">
+                                <h5>{{ $wc->description }}</h5>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         @endif
@@ -120,7 +126,7 @@
     @endauth
     @guest
     <div class="container">
-        <h5>Whoops! You haven't <a href="{{ ('register') }}">registered</a> for an acocunt yet!</h5>
+        <h5>Whoops! You haven't <a href="{{ ('register') }}">registered</a> for an account yet!</h5>
     </div>
     @endguest
 @endsection
