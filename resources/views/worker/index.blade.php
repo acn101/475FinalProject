@@ -7,11 +7,6 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Welcome, {{ Auth::user()->email }}!
-                    @if ($s->id == 1)
-                        <span class="badge badge-success">{{ $s->description }}</span>
-                    @else
-                        <span class="badge badge-danger">{{ $s->description }}</span>
-                    @endif
                     <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit</a></h3>
                 </div>
                 <div class="card-body">
@@ -88,20 +83,20 @@
                 <div class="card-body">
                     <h4 class="card-title">Personal Info:</h4>
                     @if ($pi->middleName != "")
-                        <h5>Name: {{ $pi->firstName}} {{ $pi->middleName }} {{ $pi->lastName }}</h5>
+                        <p id="a-pfont">Name: {{ $pi->firstName}} {{ $pi->middleName }} {{ $pi->lastName }}</p id="a-pfont">
                     @else
-                        <h5>Name: {{ $pi->firstName}} {{ $pi->lastName }}</h5>
+                        <p id="a-pfont">Name: {{ $pi->firstName}} {{ $pi->lastName }}</p id="a-pfont">
                     @endif
                     
                     @if ($pi->secondaryNumber != "")
-                        <h5>Primary Number: {{ $pi->primaryNumber }}</h5>
-                        <h5>Secondary Number: {{ $pi->secondaryNumber }}</h5>
+                        <p id="a-pfont">Primary Number: {{ $pi->primaryNumber }}</p id="a-pfont">
+                        <p id="a-pfont">Secondary Number: {{ $pi->secondaryNumber }}</p id="a-pfont">
                     @else
-                        <h5>Primary Number: {{ $pi->primaryNumber }}</h5>
+                        <p id="a-pfont">Primary Number: {{ $pi->primaryNumber }}</p id="a-pfont">
                     @endif
                 
-                    <h5>Address: {{ $pi->address }}</h5>
-                    <h5>Email Address: {{ $pi->email }}</h5>
+                    <p id="a-pfont">Address: {{ $pi->address }}</p id="a-pfont">
+                    <p id="a-pfont">Email Address: {{ $pi->email }}</p id="a-pfont">
                 </div>
             </div>
 
@@ -109,7 +104,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit Certifications</a></h3>
+                    <h4>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-sm btn-primary float-right">Edit Certifications</a></h4>
                 </div>
                 <div class="card-body">
                     <div class="row">

@@ -58,10 +58,44 @@ class WorkerCertsController extends Controller
     public function edit(\App\Worker $id)
     {
         $cs = \App\Certification::all();
-        $wcs = DB::table('worker_certs')
-            ->rightJoin('certifications', 'id', '=', 'certificationID')
-            ->orderBy('description', 'asc')
-            ->get();
+
+        $x = DB::table('worker_certs')
+        ->where('workerID', '=', $id->id);
+
+        $wcs = DB::table('certifications')
+        ->leftJoinSub($x, 'certificationID', function($join) {
+            $join->on('id', '=', 'certificationID');
+        })
+        ->orderBy('description')
+        ->get();
+
+        // $wcs2 = DB::table('worker_certs')
+        // ->rightJoin('certifications', 'id', '=', 'certificationID')
+        // ->where('workerID', '=', $id);
+
+        // $wcs = DB::table('worker_certs')
+        // ->rightJoin('certifications', 'id', '=', 'certificationID')
+        // ->whereNull('workerID')
+        // ->union($wcs2)
+        // ->get();
+
+        // $wcs = DB::table('worker_certs')
+        // ->rightJoin('certifications', 'id', '=', 'certificationID')
+        // ->whereNull('workerID')
+        // ->orderBy('description', 'asc')
+        // ->get();
+
+        // $wcs1 = DB::table('certifications')
+        // // ->select('workerID')
+        // ->join('worker_certs', 'workerID', '=', 'certificationID')
+        // ->where('workerID', '=', $id)
+        // ->get();
+
+        // $wcs = DB::table('certifications')
+        // // ->select('description')
+        // // ->whereNotIn('wo, $wcs1)
+        // ->get();
+
 
         return view('workercerts.edit')
         ->with('cs', $cs)
