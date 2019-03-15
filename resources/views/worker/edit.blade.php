@@ -33,7 +33,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label class="card-text" for="lastName">Last Name</label>
-                                    <input class="form-control shadow-sm" type="text" name="lastName" id="" value="{{ $pi->firstName }}"
+                                    <input class="form-control shadow-sm" type="text" name="lastName" id="" value="{{ $pi->lastName }}"
                                         required>
                                 </div>
                             </div>

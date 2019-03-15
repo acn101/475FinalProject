@@ -26,7 +26,7 @@
                 <td>{{ $wt->demandFilled }} / {{ $wt->demandPlaced }}</td>
                 <td>{{ $wt->payRate }}</td>
                 <td>
-                    @if ( $wt->isActive && (($wt->demandPlaced - $wt->demandFilled) != 0) )
+                    @if ((($wt->demandPlaced - $wt->demandFilled) != 0) )
                     <p class="text-success">Open</p>
                     @else
                     <p class="text-danger">Closed</p>
@@ -37,7 +37,7 @@
                 <td>
                     <form action="{{ url('/jobs/submit', auth()->user()->id) }}" method="post">
                         @csrf
-                        @if (($wt->demandPlaced - $wt->demandFilled) == 0)
+                        @if (($wt->demandPlaced - $wt->demandFilled) == 0 && (!isset($wt->workerID)) )
                         <div class="text-primary">Full</div>
                         @elseif (isset($wt->workerID))
                         <button class="mx-1 btn btn-tiny btn-danger form-group" type="submit" name="ticket" value="{{ $wt->id }}">&times;</button>
