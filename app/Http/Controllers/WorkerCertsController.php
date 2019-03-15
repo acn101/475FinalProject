@@ -69,34 +69,6 @@ class WorkerCertsController extends Controller
         ->orderBy('description')
         ->get();
 
-        // $wcs2 = DB::table('worker_certs')
-        // ->rightJoin('certifications', 'id', '=', 'certificationID')
-        // ->where('workerID', '=', $id);
-
-        // $wcs = DB::table('worker_certs')
-        // ->rightJoin('certifications', 'id', '=', 'certificationID')
-        // ->whereNull('workerID')
-        // ->union($wcs2)
-        // ->get();
-
-        // $wcs = DB::table('worker_certs')
-        // ->rightJoin('certifications', 'id', '=', 'certificationID')
-        // ->whereNull('workerID')
-        // ->orderBy('description', 'asc')
-        // ->get();
-
-        // $wcs1 = DB::table('certifications')
-        // // ->select('workerID')
-        // ->join('worker_certs', 'workerID', '=', 'certificationID')
-        // ->where('workerID', '=', $id)
-        // ->get();
-
-        // $wcs = DB::table('certifications')
-        // // ->select('description')
-        // // ->whereNotIn('wo, $wcs1)
-        // ->get();
-
-
         return view('workercerts.edit')
         ->with('cs', $cs)
         ->with('wcs', $wcs);
@@ -111,12 +83,17 @@ class WorkerCertsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $wcs = DB::table('worker_certs')
-        ->rightJoin('certifications', 'id', '=', 'certificationID')
-        ->where('id', '=', $request->cert)
-        ->first();
+        $x = DB::table('worker_certs')
+        ->where('workerID', '=', $id);
 
-        if (!is_null($wcs->workerID)) {
+        $wcs = DB::table('certifications')
+        ->leftJoinSub($x, 'certificationID', function($join) {
+            $join->on('id', '=', 'certificationID');
+        })
+        ->orderBy('description')
+        ->get();
+
+        if (!is_null($wcs->where('certificationID', $request->cert)->first())) {
             $wc = DB::table('worker_certs')
             ->where('workerID', '=', $id)
             ->where('certificationID', '=', $request->cert);
