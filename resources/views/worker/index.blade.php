@@ -2,11 +2,11 @@
 
 @section('content')
     @auth
-        <div class="container">
+        <div class="container py-2">
         @if (Auth::user()->personal_info == 0)
             <div class="card">
                 <div class="card-header">
-                    <h3>Welcome, {{ Auth::user()->email }}!</h3>
+                    <h3>Welcome, <span class="text-primary">{{ Auth::user()->email }}</span>!</h3>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -69,57 +69,65 @@
                 </div>
             </div>
         @else
-            <div class="card">
-                <div class="card-header">
-                    <h3>Welcome, {{ Auth::user()->email }}!
-                    @if ($s->id == 1)
-                        <span class="badge badge-success">{{ $s->description }}</span>
-                    @else
-                        <span class="badge badge-danger">{{ $s->description }}</span>
-                    @endif
-                    <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-info float-right">Edit Profile</a></h3>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">Personal Info:</h4>
-                    @if ($pi->middleName != "")
-                        <p id="a-pfont">Name: {{ $pi->firstName}} {{ $pi->middleName }} {{ $pi->lastName }}</p id="a-pfont">
-                    @else
-                        <p id="a-pfont">Name: {{ $pi->firstName}} {{ $pi->lastName }}</p id="a-pfont">
-                    @endif
+
+            <h2>Welcome, <span class="text-primary">{{ Auth::user()->email }}</span>!</h2>
+
+        <!-- <div class="row"> -->
+            <!-- <div class="col-sm-6"> -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Personal Information
+                        @if ($s->id == 1)
+                            <span class="badge badge-success">{{ $s->description }}</span>
+                        @else
+                            <span class="badge badge-danger">{{ $s->description }}</span>
+                        @endif
+                        <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-info float-right">Edit Profile</a></h3>
+                    </div>
+                    <div class="card-body row">
+                        @if ($pi->middleName != "")
+                            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Name:</span> {{ $pi->firstName}} {{ $pi->middleName }} {{ $pi->lastName }}</h5 id="a-pfont">
+                        @else
+                            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Name:</span> {{ $pi->firstName}} {{ $pi->lastName }}</h5 id="a-pfont">
+                        @endif
+                        
+                        @if ($pi->secondaryNumber != "")
+                            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Primary Number:</span> {{ $pi->primaryNumber }}</h5 id="a-pfont">
+                            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Secondary Number:</span> {{ $pi->secondaryNumber }}</h5 id="a-pfont">
+                        @else
+                            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Primary Number:</span> {{ $pi->primaryNumber }}</h5 id="a-pfont">
+                        @endif
                     
-                    @if ($pi->secondaryNumber != "")
-                        <p id="a-pfont">Primary Number: {{ $pi->primaryNumber }}</p id="a-pfont">
-                        <p id="a-pfont">Secondary Number: {{ $pi->secondaryNumber }}</p id="a-pfont">
-                    @else
-                        <p id="a-pfont">Primary Number: {{ $pi->primaryNumber }}</p id="a-pfont">
-                    @endif
-                
-                    <p id="a-pfont">Address: {{ $pi->address }}</p id="a-pfont">
-                    <p id="a-pfont">Email Address: {{ $pi->email }}</p id="a-pfont">
+                        <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Address:</span> {{ $pi->address }}</h5 id="a-pfont">
+                        <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Email Address:</span> {{ $pi->email }}</h5 id="a-pfont">
+                    </div>
                 </div>
-            </div>
+            <!-- </div> -->
 
             <br>
 
-            <div class="card">
-                <div class="card-header">
-                    <h4>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-info float-right">Edit Certifications</a></h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        @foreach ($wcs as $wc)
-                            <div class="col-sm-4 py-1">
-                                <h5>{{ $wc->description }}</h5>
-                            </div>
-                        @endforeach
+            <!-- <div class="col-sm-6"> -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-info float-right">Edit Certifications</a></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ($wcs as $wc)
+                                <div class="col-sm-4 py-2">
+                                    <h5>• {{ $wc->description }}</h5>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
+        <!-- </div> -->
         @endif
         </div>
     @endauth
     @guest
-    <div class="container">
+    <div class="container py-2">
         <div class="alert alert-dismissible alert-danger">
             <strong>Oh snap!</strong> You must <a href="{{ url('/register') }}" class="alert-link">register</a> to access our service.
         </div>

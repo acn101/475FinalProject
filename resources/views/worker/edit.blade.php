@@ -2,7 +2,7 @@
 
 @section('content')
     @auth
-        <div class="container">
+        <div class="container py-2">
 
             <a class="my-2 btn btn-warning" href="{{ url('worker') }}">Go Back</a>
 
@@ -63,11 +63,11 @@
 
                         <div class="form-group">
                             <label class="card-text" for="email">Email Address</label>
-                            <input class="form-control shadow-sm" type="email" name="email" id="" value="{{ Auth::user()->email }}"
+                            <input class="text-white form-control bg-light" type="email" name="email" id="" value="{{ Auth::user()->email }}"
                                 required disabled>
                         </div>
 
-                        <button class="btn btn-success" type="submit">Submit</button>
+                        <button class="btn btn-success" type="submit">Save</button>
                     </form>
                 </div>
             </div>
@@ -75,7 +75,7 @@
 
     @endauth
     @guest
-        <div class="container">
+        <div class="container py-2">
             <h5>Whoops! You haven't <a href="{{ ('register') }}">registered</a> for an acocunt yet!</h5>
         </div>
     @endguest
