@@ -3,6 +3,9 @@
 @section('content')
     @auth
         <div class="container">
+
+            <a class="my-2 btn btn-warning" href="{{ url('worker') }}">Go Back</a>
+
             <div class="card">
                 <div class="card-header">
                     <h1>Editing, {{ Auth::user()->email }}'s personal information.</h1>
@@ -64,11 +67,12 @@
                                 required disabled>
                         </div>
 
-                        <button class="btn btn-outline-primary" type="submit">Submit</button>
+                        <button class="btn btn-success" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
+
     @endauth
     @guest
         <div class="container">

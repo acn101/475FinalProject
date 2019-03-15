@@ -4,6 +4,8 @@
     @auth
     <div class="container">
 
+        <a class="my-2 btn btn-warning" href="{{ url('worker') }}">Go Back</a>
+
         <div class="card">
             <div class="card-header">
                 <h3>Edit Certifications</h3>
@@ -16,9 +18,9 @@
                             <form action="/workercerts/update/{{ auth()->user()->id }}" method="post">
                                 @csrf
                                 @if (isset($wc->certificationID))
-                                    <button class="btn btn-danger" type="submit" name="cert" value="{{ $wc->id }}">&nbsp-</button>
+                                    <button class="mx-1 btn btn-small btn-danger" type="submit" name="cert" value="{{ $wc->id }}">&times;</button>
                                 @else
-                                    <button class="btn btn-success" type="submit" name="cert" value="{{ $wc->id }}">+</button>
+                                    <button class="mx-1 btn btn-small btn-success" type="submit" name="cert" value="{{ $wc->id }}">&plus;</button>
                                 @endif
                                 <label for=""><h5>{{ $wc->description }}</h5></label>
                             </form>
@@ -26,11 +28,6 @@
                     @endforeach
                 </div>
             </div>
-        </div>
-
-        <br>
-        <div class="container">
-            <a class="btn btn-secondary" href="{{ url('worker') }}">Go Back</a>
         </div>
     </div>
     @endauth

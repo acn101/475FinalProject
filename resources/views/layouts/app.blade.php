@@ -19,9 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #dedede;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">MALT Job Services</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

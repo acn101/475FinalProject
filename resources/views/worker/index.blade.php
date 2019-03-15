@@ -6,8 +6,7 @@
         @if (Auth::user()->personal_info == 0)
             <div class="card">
                 <div class="card-header">
-                    <h3>Welcome, {{ Auth::user()->email }}!
-                    <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit</a></h3>
+                    <h3>Welcome, {{ Auth::user()->email }}!</h3>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -78,7 +77,7 @@
                     @else
                         <span class="badge badge-danger">{{ $s->description }}</span>
                     @endif
-                    <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-outline-success float-right">Edit Profile</a></h3>
+                    <a href="{{ url('/worker/edit', auth()->user()->id) }}" class="btn btn-info float-right">Edit Profile</a></h3>
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Personal Info:</h4>
@@ -104,7 +103,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-sm btn-primary float-right">Edit Certifications</a></h4>
+                    <h4>Certifications<a href="{{ url('/workercerts/edit', auth()->user()->id) }}" class="btn btn-info float-right">Edit Certifications</a></h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -121,7 +120,9 @@
     @endauth
     @guest
     <div class="container">
-        <h5>Whoops! You haven't <a href="{{ ('register') }}">registered</a> for an account yet!</h5>
+        <div class="alert alert-dismissible alert-danger">
+            <strong>Oh snap!</strong> You must <a href="{{ url('/register') }}" class="alert-link">register</a> to access our service.
+        </div>
     </div>
     @endguest
 @endsection
