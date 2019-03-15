@@ -75,8 +75,11 @@
 
     @endauth
     @guest
-        <div class="container py-2">
-            <h5>Whoops! You haven't <a href="{{ ('register') }}">registered</a> for an acocunt yet!</h5>
+    <div class="container py-2">
+        <div class="alert alert-dismissible alert-danger">
+            <strong>Oh snap!</strong> You must <a href="{{ url('/register') }}" class="alert-link">register</a> to access
+            our service.
         </div>
+    </div>
     @endguest
 @endsection
