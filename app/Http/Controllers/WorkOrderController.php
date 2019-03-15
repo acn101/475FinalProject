@@ -33,4 +33,21 @@ class WorkOrderController extends Controller
             return view ('worker.index');
         }
     }
+
+    public function job(WorkOrder $id) {
+        $x = DB::table('work_orders')
+        ->join('job_sites', 'job_sites.id', '=', 'jobSiteID')
+        ->where('work_orders.id', '=', $id->id)
+        ->first();
+
+        $y = DB::table('worker_tickets')
+        ->where('workOrderID', '=', $id->id)
+        ->where('workerID', '=', auth()->user()->id)
+        ->get();
+
+        return view ('workorder.job')
+        ->with('id', $id)
+        ->with('x', $x)
+        ->with('y', $y);
+    }
 }

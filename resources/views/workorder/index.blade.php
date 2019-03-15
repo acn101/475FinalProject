@@ -3,7 +3,7 @@
 @section('content')
 @auth
 <div class="container py-4">
-    <table class="table table-striped bg-dark">
+    <table class="table table-responsive table-striped bg-dark">
         <thead>
             <tr>
                 <th scope="col">Name</th>
@@ -19,12 +19,12 @@
         <tbody>
             @foreach ($wts as $wt)
             <tr>
-                <th scope="row">{{ $wt->name }}</th>
+                <th scope="row"><a class="text-primary" href="{{ url('/jobs', $wt->id) }}">{{ $wt->name }}</a></th>
                 <td>{{ $wt->description }}</td>
                 <td>{{ date('F d, Y', strtotime($wt->startDate)) }} - {{ date('F d, Y', strtotime($wt->endDate)) }}</td>
                 <td>{{ date('h:m A', strtotime($wt->startTime)) }} - {{ date('h:m A', strtotime($wt->endTime)) }}</td>
                 <td>{{ $wt->demandFilled }} / {{ $wt->demandPlaced }}</td>
-                <td>{{ $wt->payRate }}</td>
+                <td>${{ $wt->payRate }}</td>
                 <td>
                     @if ((($wt->demandPlaced - $wt->demandFilled) != 0) )
                     <p class="text-success">Open</p>

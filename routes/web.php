@@ -25,3 +25,4 @@ Route::post('/workercerts/update/{id}', 'WorkerCertsController@update');
 
 Route::get('/jobs', 'WorkOrderController@index');
 Route::post('/jobs/submit/{id}', 'WorkerTicketsController@update');
+Route::get('/jobs/{id}', 'WorkOrderController@job');

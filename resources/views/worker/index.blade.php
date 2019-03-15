@@ -91,26 +91,25 @@
         </div>
         <div class="card-body row">
             @if ($pi->middleName != "")
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Name:</span> {{ $pi->firstName}} {{
-                $pi->middleName }} {{ $pi->lastName }}</h5 id="a-pfont">
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Name:</span> {{ $pi->firstName}} {{
+                $pi->middleName }} {{ $pi->lastName }}</h5>
             @else
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Name:</span> {{ $pi->firstName}} {{
-                $pi->lastName }}</h5 id="a-pfont">
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Name:</span> {{ $pi->firstName}} {{
+                $pi->lastName }}</h5>
             @endif
 
             @if ($pi->secondaryNumber != "")
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Primary Number:</span> {{
-                $pi->primaryNumber }}</h5 id="a-pfont">
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Secondary Number:</span> {{
-                $pi->secondaryNumber }}</h5 id="a-pfont">
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Primary Number:</span> {{
+                $pi->primaryNumber }}</h5>
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Secondary Number:</span> {{
+                $pi->secondaryNumber }}</h5>
             @else
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Primary Number:</span> {{
-                $pi->primaryNumber }}</h5 id="a-pfont">
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Primary Number:</span> {{
+                $pi->primaryNumber }}</h5>
             @endif
 
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Address:</span> {{ $pi->address }}</h5 id="a-pfont">
-            <h5 class="col-sm-4 py-2" id="a-pfont"><span class="text-muted">Email Address:</span> {{ $pi->email }}</h5
-                id="a-pfont">
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Address:</span> {{ $pi->address }}</h5>
+            <h5 class="col-sm-4 py-2"><span class="text-muted">Email Address:</span> {{ $pi->email }}</h5>
         </div>
     </div>
     <!-- </div> -->
@@ -126,8 +125,10 @@
         <div class="card-body">
             <div class="row">
                 @foreach ($wcs as $wc)
-                <div class="col-sm-4 py-2">
-                    <h5>• {{ $wc->description }}</h5>
+                <div class="col-sm-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">•&nbsp;&nbsp;{{ $wc->description }}</li>
+                    </ul>
                 </div>
                 @endforeach
             </div>
@@ -145,13 +146,18 @@
                     Jobs</a></h3>
         </div>
         <div class="card-body">
-            <div class="row">
-                @foreach ($wts as $wt)
-                <div class="col-sm-4 py-2">
-                    <h5>• {{ $wt->name }}</h5>
+            @foreach ($wts as $wt)
+            <div class="container py-2">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span class="text-muted">Job: </span> <a href="{{ url('/jobs', $wt->id) }}">{{ $wt->name }}</a>
+                    </div>
+                    <div class="col-sm-10">
+                        <span class="text-muted">Description: </span> {{ $wt->description }}
+                    </div>
                 </div>
-                @endforeach
             </div>
+            @endforeach
         </div>
     </div>
     <!-- end jobs -->
