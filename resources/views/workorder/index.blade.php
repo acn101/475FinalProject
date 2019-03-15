@@ -3,6 +3,11 @@
 @section('content')
 @auth
 <div class="container py-4">
+    <!-- pagination -->
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-auto">{{ $wts->links() }}</div>
+    </div>
+
     <table class="table table-responsive table-striped bg-dark">
         <thead>
             <tr>

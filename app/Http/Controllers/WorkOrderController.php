@@ -25,7 +25,7 @@ class WorkOrderController extends Controller
                 $join->on('id', '=', 'workOrderID');
             })
             ->orderby('id')
-            ->get();
+            ->paginate(9);
 
             return view('workorder.index')
             ->with('wts', $wts);
