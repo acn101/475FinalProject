@@ -35,19 +35,23 @@ class WorkOrderController extends Controller
     }
 
     public function job(WorkOrder $id) {
-        $x = DB::table('work_orders')
-        ->join('job_sites', 'job_sites.id', '=', 'jobSiteID')
-        ->where('work_orders.id', '=', $id->id)
-        ->first();
+        if (auth()->check() && auth()->user()->personal_info == 1) {
+            $x = DB::table('work_orders')
+            ->join('job_sites', 'job_sites.id', '=', 'jobSiteID')
+            ->where('work_orders.id', '=', $id->id)
+            ->first();
 
-        $y = DB::table('worker_tickets')
-        ->where('workOrderID', '=', $id->id)
-        ->where('workerID', '=', auth()->user()->id)
-        ->get();
+            $y = DB::table('worker_tickets')
+            ->where('workOrderID', '=', $id->id)
+            ->where('workerID', '=', auth()->user()->id)
+            ->get();
 
-        return view ('workorder.job')
-        ->with('id', $id)
-        ->with('x', $x)
-        ->with('y', $y);
+            return view ('workorder.job')
+            ->with('id', $id)
+            ->with('x', $x)
+            ->with('y', $y);
+        }  else {
+            return redirect('/register');
+        }
     }
 }
