@@ -10,7 +10,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
-                <th scope="col">Open Positions</th>
+                <th scope="col">Positions</th>
                 <th scope="col">Salary</th>
                 <th scope="col">Status</th>
                 <th scope="col">Apply</th>

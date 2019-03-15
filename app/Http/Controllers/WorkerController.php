@@ -22,11 +22,16 @@ class WorkerController extends Controller
             ->join('worker_certs', 'certificationID', '=', 'id')
             ->where('workerID', '=', auth()->user()->id)
             ->get();
+            $wts = DB::table('work_orders')
+            ->join('worker_tickets', 'workOrderID', '=', 'id')
+            ->where('workerID', '=', auth()->user()->id)
+            ->get();
 
             return view ('worker.index')
             ->with('pi', $pi)
             ->with('s', $s)
-            ->with('wcs', $wcs);
+            ->with('wcs', $wcs)
+            ->with('wts', $wts);
         } else {
             return view ('worker.index');
         }
