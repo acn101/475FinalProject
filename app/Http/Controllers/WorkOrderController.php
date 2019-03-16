@@ -16,10 +16,21 @@ class WorkOrderController extends Controller
      */
     public function index(Request $request)
     {
-        $order = $request->input('order');
+        if ($request->input('order') == '') {
+            $order = 'id';
+        } else {
+            $order = $request->input('order');
+        }
+
         $sort = $request->input('sort');
 
-        $sort == 'ASC' ? $sort ='DESC' : $sort = 'ASC';
+        if ($sort == '') {
+            $sort = 'DESC';
+        }
+
+        if ($request->input('c') == '1') {
+            $sort == 'ASC' ? $sort = 'DESC' : $sort = 'ASC';
+        }
 
         if (auth()->check() && auth()->user()->personal_info == 1) {
             $x = DB::table('worker_tickets')
@@ -34,7 +45,8 @@ class WorkOrderController extends Controller
 
             return view('workorder.index')
             ->with('wts', $wts)
-            ->with('sort', $sort);
+            ->with('sort', $sort)
+            ->with('order', $order);
         } else {
             return view ('worker.index');
         }

@@ -5,18 +5,18 @@
 <div class="container py-4">
     <!-- pagination -->
     <div class="row justify-content-sm-center">
-        <div class="col-sm-auto">{{ $wts->links() }}</div>
+        <div class="col-sm-auto">{{ $wts->appends(['sort' => $sort, 'order' => $order])->links() }}</div>
     </div>
 
     <table class="table table-responsive table-striped bg-dark">
         <thead>
             <tr>
-                <th scope="col"><a class="text-light" href="?order=name&sort={{ $sort }}">Name</a></th>
-                <th scope="col"><a class="text-light" href="?order=description&sort={{ $sort }}">Description</a></th>
-                <th scope="col"><a class="text-light" href="?order=startDate&sort={{ $sort }}">Date</a></th>
-                <th scope="col"><a class="text-light" href="?order=startTime&sort={{ $sort }}">Time</a></th>
-                <th scope="col"><a class="text-light" href="?order=demandFilled&sort={{ $sort }}">Positions</a></th>
-                <th scope="col"><a class="text-light" href="?order=payRate&sort={{ $sort }}">Salary</a></th>
+                <th scope="col"><a class="text-light" href="?order=name&sort={{ $sort }}&c=1">Name</a></th>
+                <th scope="col"><a class="text-light" href="?order=description&sort={{ $sort }}&c=1">Description</a></th>
+                <th scope="col"><a class="text-light" href="?order=startDate&sort={{ $sort }}&c=1">Date</a></th>
+                <th scope="col"><a class="text-light" href="?order=startTime&sort={{ $sort }}&c=1">Time</a></th>
+                <th scope="col"><a class="text-light" href="?order=demandFilled&sort={{ $sort }}&c=1">Positions</a></th>
+                <th scope="col"><a class="text-light" href="?order=payRate&sort={{ $sort }}&c=1">Salary</a></th>
                 <th scope="col">Status</th>
                 <th scope="col">Apply</th>
             </tr>
