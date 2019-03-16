@@ -14,8 +14,13 @@ class WorkOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $order = $request->input('order');
+        $sort = $request->input('sort');
+
+        $sort == 'ASC' ? $sort ='DESC' : $sort = 'ASC';
+
         if (auth()->check() && auth()->user()->personal_info == 1) {
             $x = DB::table('worker_tickets')
             ->where('workerID', '=', auth()->user()->id);
@@ -24,11 +29,12 @@ class WorkOrderController extends Controller
             ->leftJoinSub($x, 'workOrderID', function($join) {
                 $join->on('id', '=', 'workOrderID');
             })
-            ->orderby('id')
+            ->orderby($order, $sort)
             ->paginate(9);
 
             return view('workorder.index')
-            ->with('wts', $wts);
+            ->with('wts', $wts)
+            ->with('sort', $sort);
         } else {
             return view ('worker.index');
         }

@@ -11,12 +11,12 @@
     <table class="table table-responsive table-striped bg-dark">
         <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-                <th scope="col">Positions</th>
-                <th scope="col">Salary</th>
+                <th scope="col"><a class="text-light" href="?order=name&sort={{ $sort }}">Name</a></th>
+                <th scope="col"><a class="text-light" href="?order=description&sort={{ $sort }}">Description</a></th>
+                <th scope="col"><a class="text-light" href="?order=startDate&sort={{ $sort }}">Date</a></th>
+                <th scope="col"><a class="text-light" href="?order=startTime&sort={{ $sort }}">Time</a></th>
+                <th scope="col"><a class="text-light" href="?order=demandFilled&sort={{ $sort }}">Positions</a></th>
+                <th scope="col"><a class="text-light" href="?order=payRate&sort={{ $sort }}">Salary</a></th>
                 <th scope="col">Status</th>
                 <th scope="col">Apply</th>
             </tr>
