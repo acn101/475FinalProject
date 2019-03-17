@@ -44,7 +44,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label class="card-text" for="primaryNumber">Phone Number</label>
-                            <input class="form-control shadow-sm" type="text" name="primaryNumber" id="" placeholder="Phone Number"
+                            <input class="form-control shadow-sm" type="tetelxt" name="primaryNumber" id="" placeholder="Phone Number"
                                 required>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label class="card-text" for="secondaryNumber">Secondary Number (optional)</label>
-                            <input class="form-control shadow-sm" type="text" name="secondaryNumber" id="" placeholder="Secondary Number">
+                            <input class="form-control shadow-sm" type="tel" name="secondaryNumber" id="" placeholder="Secondary Number">
                         </div>
                     </div>
                 </div>
@@ -150,11 +150,22 @@
             <div class="container py-2">
                 <div class="row">
                     <div class="col-sm-2">
-                        <span class="text-muted">Job: </span> <a href="{{ url('/jobs', $wt->id) }}">{{ $wt->name }}</a>
+                        <span class="text-muted">Job: </span> <a class="text-warning" href="{{ url('/jobs', $wt->id) }}">{{ $wt->name }}</a>
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <span class="text-muted">Description: </span> {{ $wt->description }}
                     </div>
+
+                    <form class="col-sm-1" action="{{ url('/jobs/submit', auth()->user()->id) }}" method="post">
+                        @csrf
+                        @if (($wt->demandPlaced - $wt->demandFilled) == 0 && (!isset($wt->workerID)) )
+                        <div class="text-primary">Full</div>
+                        @elseif (isset($wt->workerID))
+                        <button class="mx-1 btn btn-tiny btn-danger form-group" type="submit" name="ticket" value="{{ $wt->id }}">&times;</button>
+                        @else
+                        <button class="mx-1 btn btn-tiny btn-success form-group" type="submit" name="ticket" value="{{ $wt->id }}">&plus;</button>
+                        @endif
+                    </form>
                 </div>
             </div>
             @endforeach

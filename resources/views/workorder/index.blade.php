@@ -24,7 +24,7 @@
         <tbody>
             @foreach ($wts as $wt)
             <tr>
-                <th scope="row"><a class="text-primary" href="{{ url('/jobs', $wt->id) }}">{{ $wt->name }}</a></th>
+                <th scope="row"><a class="text-warning" href="{{ url('/jobs', $wt->id) }}">{{ $wt->name }}</a></th>
                 <td>{{ $wt->description }}</td>
                 <td>{{ date('F d, Y', strtotime($wt->startDate)) }} - {{ date('F d, Y', strtotime($wt->endDate)) }}</td>
                 <td>{{ date('h:m A', strtotime($wt->startTime)) }} - {{ date('h:m A', strtotime($wt->endTime)) }}</td>
