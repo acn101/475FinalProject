@@ -45,9 +45,9 @@
                         @if (($wt->demandPlaced - $wt->demandFilled) == 0 && (!isset($wt->workerID)) )
                         <div class="text-primary">Full</div>
                         @elseif (isset($wt->workerID))
-                        <button class="mx-1 btn btn-tiny btn-danger form-group" type="submit" name="ticket" value="{{ $wt->id }}">&times;</button>
+                        <button class="mx-1 btn btn-tiny btn-danger form-group" type="submit" name="ticket" value="{{ $wt->woid }}">&times;</button>
                         @else
-                        <button class="mx-1 btn btn-tiny btn-success form-group" type="submit" name="ticket" value="{{ $wt->id }}">&plus;</button>
+                        <button class="mx-1 btn btn-tiny btn-success form-group" type="submit" name="ticket" value="{{ $wt->woid }}">&plus;</button>
                         @endif
                     </form>
                 </td>

@@ -34,14 +34,30 @@ class WorkOrderController extends Controller
         }
 
         if (auth()->check() && auth()->user()->personal_info == 1) {
+
+            $i = DB::table('worker_certs')
+            ->select('certificationID as cid', 'workerid as wid')
+            ->where('worker_certs.workerID','=',auth()->user()->id);
+
+            $j = DB::table('required_certs')
+            ->select('cid', 'wid', 'certificationID as cid2', 'workOrderID as woid')
+            ->joinSub($i,'cid',function($join) {
+                $join->on('required_certs.certificationID','=','cid');
+            })
+            ->where('wid','=',auth()->user()->id);
+
             $x = DB::table('worker_tickets')
             ->where('workerID', '=', auth()->user()->id);
 
             $wts = DB::table('work_orders')
+            ->joinSub($j, 'woid', function($join) {
+                $join->on('work_orders.id','=','woid');
+            })
             ->leftJoinSub($x, 'workOrderID', function($join) {
                 $join->on('id', '=', 'workOrderID');
             })
-            ->orderby($order, $sort)
+            ->groupBy('work_orders.id')
+            ->orderBy($order, $sort)
             ->paginate(9);
 
             return view('workorder.index')
