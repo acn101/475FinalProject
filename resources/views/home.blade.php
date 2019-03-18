@@ -7,7 +7,9 @@
             <h1>Welcome to <span class="text-warning">MALT Job Services!</span></h1>
             <br>
             <h4>Our system simplifies the process of applying for jobs with an easy to use interface</h4>
+            @guest
             <p style="margin-top: 40%;">Please <a href="{{ url('/register') }}">register</a> to use our services</p>
+            @endguest
         </div>
     </div>
 </div>
