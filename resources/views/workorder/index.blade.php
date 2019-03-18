@@ -8,7 +8,7 @@
         <div class="col-sm-auto">{{ $wts->appends(['sort' => $sort, 'order' => $order])->links() }}</div>
     </div>
 
-    <table class="table table-responsive table-striped bg-dark">
+    <table class="table table-striped bg-dark">
         <thead>
             <tr>
                 <th scope="col"><a class="text-light" href="?order=name&sort={{ $sort }}&c=1">Name</a></th>
