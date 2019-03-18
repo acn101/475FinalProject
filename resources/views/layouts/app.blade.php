@@ -33,6 +33,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a href="{{ url('/worker') }}" class="nav-link">My Account</a>
@@ -43,6 +44,7 @@
                             </a>
                         </li>
                     </ul>
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

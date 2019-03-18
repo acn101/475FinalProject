@@ -16,8 +16,9 @@ class WorkOrderController extends Controller
      */
     public function index(Request $request)
     {
+        // sorting start
         if ($request->input('order') == '') {
-            $order = 'id';
+            $order = 'work_orders.id';
         } else {
             $order = $request->input('order');
         }
